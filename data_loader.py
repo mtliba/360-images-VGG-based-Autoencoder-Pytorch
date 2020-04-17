@@ -4,7 +4,7 @@ from skimage import io, transform
 from torch.utils.data import Dataset
 from torchvision import transforms
 
-class Autoencoder(Dataset):
+class Autoencoder_dataset(Dataset):
     """autoencoder dataset."""
 
     def __init__(self ,train =True , root_dir, transform=None , val_perc):
@@ -25,6 +25,8 @@ class Autoencoder(Dataset):
         img_name = os.path.join(self.root_dir,
                                 self.frame_list[idx])
         image = io.imread(img_name)
+        if len(image.shape) == 3 :
+            image = image.unsqueeze(0)
         if self.transform:
             sample = self.transform(image)
 
