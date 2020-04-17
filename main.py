@@ -4,7 +4,8 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from torchvision.utils import save_image
-from data_loader import Autoencoder
+from data_loader import Autoencoder_dataset
+from model import Autoencoder
 import os
 
 root ='path to your image dataset'
@@ -36,7 +37,7 @@ if not os.path.exists('./decoded_images'):
 def main():
     
 
-    trainset = Autoencoder(True ,root,transforms=transforms.Compose([
+    trainset = Autoencoder_dataset(True ,root,transforms=transforms.Compose([
         transforms.Rescale(576,288),
         transforms.ToTensor(),
         transforms.Normalize(mean = [0.485, 0.456, 0.406],
@@ -44,7 +45,7 @@ def main():
     ]))
     train_loader = DataLoader(trainset, batch_size=batch_size, shuffle=True)
 
-    valset = Autoencoder(False ,root,transforms=transforms.Compose([
+    valset = Autoencoder_dataset(False ,root,transforms=transforms.Compose([
         transforms.Rescale(576,288),
         transforms.ToTensor(),
         transforms.Normalize(mean = [0.485, 0.456, 0.406],
