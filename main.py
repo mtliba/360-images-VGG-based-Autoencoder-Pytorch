@@ -28,6 +28,13 @@ def adjust_learning_rate(optimizer, epoch):
     lr = lr * (0.5 ** (epoch // 30))
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
+        
+def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
+    """
+    Save the training model
+    """
+    torch.save(state, filename)     
+    
 # setting hyperparameters
 batch_size = 128,
 num_epochs = 150,
